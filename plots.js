@@ -12,11 +12,13 @@ function init() {
       });
       var firstSample = sampleNames[0];
       buildMetadata(firstSample);
+      buildCharts(firstSample);
     });
 }
 
 function optionChanged(newSample) {
     buildMetadata(newSample);
+    buildCharts(newSample);
   };
 init();
 
@@ -36,5 +38,17 @@ function buildMetadata(sample) {
       PANEL.append("h6").text('LOCATION: ' + result.location);
       PANEL.append("h6").text('BBTYPE: '+result.bbtype);
       PANEL.append("h6").text('WFREQ: '+result.wfreq);
+    });
+}
+
+function buildCharts(sample) {
+    d3.json('samples.json').then((data) => {
+      // Gather variable from data.samples
+      var OTU = data.samples;
+      var resultOTU = OTU.filter(sampleObj => sampleObj.id == sample);
+      var finalOTU = resultOTU[0];
+      var otu_ids = finalOTU.otu_ids;
+      var sample_values = finalOTU.sample_values;
+      var otu_labels = finalOTU.otu_labels;
     });
 }
