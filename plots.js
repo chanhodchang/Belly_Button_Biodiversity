@@ -72,6 +72,33 @@ function buildCharts(sample) {
       var barData = [barTrace];
 
       Plotly.newPlot('bar', barData, barLayout);
-      
+
+      // Create Bubble Chart
+      var bubbleTrace = {
+        x: otu_ids,
+        y: sample_values,
+        mode: 'markers',
+        text: otu_labels,
+        marker: {
+          color: otu_ids,
+          size: sample_values,
+          colorscale: 'Earth'
+        }
+      };
+
+      var bubbleData = [bubbleTrace];
+
+      var bubbleLayout = {
+        xaxis: { title: 'OTU ID' },
+        title: "Bacteria Cultures Per Sample",
+        margin: {
+          t: 0,
+          t: 30
+        },
+        hovermode: 'closest',
+      };
+
+      Plotly.newPlot('bubble', bubbleData, bubbleLayout)
+
     });
 }
