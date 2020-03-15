@@ -120,6 +120,46 @@ function buildGauge(wfreq) {
     var pathEnd = "Z";
     var path = mainPath.concat(paX, space, paY, pathEnd);
   
+    var gaugeData= [
+        {
+            type: "scatter",
+            x: [0],
+            y: [0],
+            marker: {size:12, color: "80000"},
+            showlegend: false,
+            name: "Freq",
+            text: level,
+            hoverinfo: "text+name"
+        },
+        {
+            values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
+            rotation: 90, 
+            text: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
+            textinfo: "text",
+            textposition: "inside",
+            marker: {
+                colors: [
+                    "rgba(0, 105, 11, .5)",
+                    "rgba(10, 120, 22, .5)",
+                    "rgba(15, 127, 0, .5)",
+                    "rgba(110, 154, 22, .5)",
+                    "rgba(170, 202, 42, .5)",
+                    "rgba(205, 209, 95, .5)",
+                    "rgba(210, 206, 145, .5)",
+                    "rgba(230, 226, 202, .5)",
+                    "rgba(240, 230, 215, .5)",
+                    "rgba(255, 255, 255, 0)",
+                ]
+            },
+        labels: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
+        hoverinfo: "label",
+        hole: 0.5,
+        type: "pie",
+        showlegend: false
+        },
+    ];
     
+      var gaugeChart = document.getElementById("gauge");
+      Plotly.newPlot(gaugeChart, gaugeData, gaugeLayout);
   }
   
