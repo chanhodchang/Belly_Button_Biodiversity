@@ -158,6 +158,32 @@ function buildGauge(wfreq) {
         showlegend: false
         },
     ];
+
+    var gaugeLayout = {
+        title: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
+        width: 600, 
+        height: 500, 
+        shapes: [{
+          type: 'path',
+          path: path,
+          fillcolor: '850000',
+          line: {
+            color: '850000'
+          }
+        }],
+        xaxis: {
+          zeroline: false,
+          showticklabels: false,
+          showgrid: false,
+          range: [-1,1]
+        },
+        yaxis: {
+          zeroline: false,
+          showticklabels: false,
+          showgrid: false,
+          range: [-1,1]
+        }
+      };
     
       var gaugeChart = document.getElementById("gauge");
       Plotly.newPlot(gaugeChart, gaugeData, gaugeLayout);
