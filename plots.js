@@ -102,3 +102,24 @@ function buildCharts(sample) {
 
     });
 }
+
+function buildGauge(wfreq) {
+    // Frequencey between 0 and 180
+    var level = parseFloat(wfreq) * 20;
+    // Calculations using MathPI
+    var degrees = 180 - level;
+    var radius = 0.5;
+    var radians = (degrees * Math.PI)/180;
+    var x = radius * Math.cos(radians);
+    var y = radius * Math.sin(radians);
+    // Main Path
+    var mainPath = "M -.0 -0.05 L .0 0.05 L";
+    var paX = String(x);
+    var space = " ";
+    var paY = String(y);
+    var pathEnd = "Z";
+    var path = mainPath.concat(paX, space, paY, pathEnd);
+  
+    
+  }
+  
