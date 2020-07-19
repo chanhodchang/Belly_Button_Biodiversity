@@ -13,14 +13,15 @@ function init() {
       var firstSample = sampleNames[0];
       buildMetadata(firstSample);
       buildCharts(firstSample);
-    });
-}
+})}
+
+init();  
 
 function optionChanged(newSample) {
     buildMetadata(newSample);
     buildCharts(newSample);
-  };
-init();
+}
+
 
 function buildMetadata(sample) {
     d3.json("samples.json").then((data) => {
@@ -99,29 +100,26 @@ function buildCharts(sample) {
       };
 
       Plotly.newPlot('bubble', bubbleData, bubbleLayout)
-
-    });
-}
-
-function buildGauge(wfreq) {
-    // Frequencey between 0 and 180
-    var level = parseFloat(wfreq) * 20;
-    // Calculations using MathPI
-    var degrees = 180 - level;
-    var radius = 0.5;
-    var radians = (degrees * Math.PI)/180;
-    var x = radius * Math.cos(radians);
-    var y = radius * Math.sin(radians);
-    // Main Path
-    var mainPath = "M -.0 -0.05 L .0 0.05 L";
-    var paX = String(x);
-    var space = " ";
-    var paY = String(y);
-    var pathEnd = "Z";
-    var path = mainPath.concat(paX, space, paY, pathEnd);
   
-    var gaugeData= [
-        {
+      // Frequencey between 0 and 180
+      var level = parseFloat(wfreq) * 20;
+      // Calculations using MathPI
+      var degrees = 180 - level;
+      var radius = 0.5;
+      var radians = (degrees * Math.PI)/180;
+      var x = radius * Math.cos(radians);
+      var y = radius * Math.sin(radians);
+      // Main Path
+      var mainPath = "M -.0 -0.05 L .0 0.05 L";
+      var paX = String(x);
+      var space = " ";
+      var paY = String(y);
+      var pathEnd = "Z";
+      var path = mainPath.concat(paX, space, paY, pathEnd);
+    
+      // Build Gauge
+      var gaugeData= [
+          {
             type: "scatter",
             x: [0],
             y: [0],
@@ -130,8 +128,8 @@ function buildGauge(wfreq) {
             name: "Freq",
             text: level,
             hoverinfo: "text+name"
-        },
-        {
+          },
+          {
             values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
             rotation: 90, 
             text: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
@@ -151,41 +149,41 @@ function buildGauge(wfreq) {
                     "rgba(255, 255, 255, 0)",
                 ]
             },
-        labels: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
-        hoverinfo: "label",
-        hole: 0.5,
-        type: "pie",
-        showlegend: false
-        },
-    ];
+            labels: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
+            hoverinfo: "label",
+            hole: 0.5,
+            type: "pie",
+            showlegend: false
+          },
+      ];
 
-    var gaugeLayout = {
-        title: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
-        width: 600, 
-        height: 500, 
-        shapes: [{
-          type: 'path',
-          path: path,
-          fillcolor: '850000',
-          line: {
-            color: '850000'
+      var gaugeLayout = {
+          title: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
+          width: 600, 
+          height: 500, 
+          shapes: [{
+            type: 'path',
+            path: path,
+            fillcolor: '850000',
+            line: {
+              color: '850000'
+            }
+          }],
+          xaxis: {
+            zeroline: false,
+            showticklabels: false,
+            showgrid: false,
+            range: [-1,1]
+          },
+          yaxis: {
+            zeroline: false,
+            showticklabels: false,
+            showgrid: false,
+            range: [-1,1]
           }
-        }],
-        xaxis: {
-          zeroline: false,
-          showticklabels: false,
-          showgrid: false,
-          range: [-1,1]
-        },
-        yaxis: {
-          zeroline: false,
-          showticklabels: false,
-          showgrid: false,
-          range: [-1,1]
-        }
-      };
-    
-      var gaugeChart = document.getElementById("gauge");
-      Plotly.newPlot(gaugeChart, gaugeData, gaugeLayout);
-  }
-  
+        };
+      
+        var gaugeChart = document.getElementById("gauge");
+        Plotly.newPlot(gaugeChart, gaugeData, gaugeLayout);
+  });
+}
